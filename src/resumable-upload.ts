@@ -248,7 +248,39 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
 
 export interface ConfigMetadata {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+
+  /**
+   * User-provided metadata, in key/value pairs.
+   */
+  metadata?: {[key: string]: any};
+  
+  /**
+   * Access controls on the object, containing one or more objectAccessControls Resources.
+   * Do not supply this field if iamConfiguration.uniformBucketLevelAccess.enabled is true
+   * for the bucket to which you are uploading the object.
+   */
+  acl[]?: string[];
+
+  /**
+   * Cache-Control directive for the object data. If omitted, and the object is accessible to all anonymous
+   * users, the default will be "public, max-age=3600".
+   */
+  cacheControl?: string;
+  contentDisposition?: string;
+  contentEncoding?: string;
+  contentLanguage?: string;
+  crc32c?: string;
+  customTime?: Date;
+  eventBasedHold?: boolean;
+  md5Hash?: string;
+  name?: string;
+
+  /**
+   * The object's retention configuration, which defines the earliest datetime that the object can be deleted or replaced.
+   */
+  retention?: object;
+  storageClass?: string;
+  temporaryHold?: boolean;
 
   /**
    * Set the length of the object being uploaded. If uploading a partial
@@ -257,7 +289,8 @@ export interface ConfigMetadata {
   contentLength?: number;
 
   /**
-   * Set the content type of the incoming data.
+   * Content-Type of the object data. If an object is stored without a
+   * Content-Type, it is served as application/octet-stream.
    */
   contentType?: string;
 }
