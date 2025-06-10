@@ -259,7 +259,7 @@ export interface ConfigMetadata {
    * Do not supply this field if iamConfiguration.uniformBucketLevelAccess.enabled is true
    * for the bucket to which you are uploading the object.
    */
-  acl[]?: string[];
+  acl?: string[];
 
   /**
    * Cache-Control directive for the object data. If omitted, and the object is accessible to all anonymous
